@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    discovery:
+      locator:
+        enable: true
+    gateway:
+      routes:
+        - id: auth-service-route
+          uri: lb://AUTH-SERVICE
+          predicates: Path=/api/auth/**
+        - id: school-service-route
+          uri: lb://SCHOOL-SERVICE
+          predicates: Path=/api/uni/**
+        - id: school-service-route
+          uri: lb://SCHOOL-SERVICE
+          predicates: Path=/uploads/**
+        - id: auth-service-route
+          uri: lb://AUTH-SERVICE
+          predicates: Path=/api/user/**
+        - id: chat-service-route
+          uri: lb://CHAT-SERVICE
+          predicates: Path=/api/chatbot/**
+        - id: chat-service-route
+          uri: lb://CHAT-SERVICE
+          predicates: Path=/api/communityChats/**
+        - id: news-service-route
+          uri: lb://NEW-SERVICE
+          predicates: Path=/api/categories/**
+        - id: news-service-route
+          uri: lb://NEW-SERVICE
+          predicates: Path=/api/news/**
+        - id: news-service-route
+          uri: lb://NEW-SERVICE
+          predicates: Path=/api/comments/**
+
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
